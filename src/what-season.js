@@ -14,36 +14,30 @@ const {
  *
  */
 function getSeason(getSeason) {
-  if (typeof getSeason == undefined)
-    console.log('Unable to determine the time of year!');
-  else {
-    if (getSeason instanceof Date) {
-      let date = getSeason.getMonth();
-      switch (date) {
-        case date < 2: {
-          console.log('winter');
-          break;
+  if (!getSeason)
+    return 'Unable to determine the time of year!';
+     if (getSeason instanceof Date) {
+      if (!getSeason.hasOwnProperty('toString')) {
+        let date = getSeason.getMonth();
+        switch (date) {
+          case 0: return 'winter';
+          case 1: return 'winter';
+          case 2: return 'spring';
+          case 3: return 'spring';
+          case 4: return 'spring';
+          case 5: return 'summer';
+          case 6: return 'summer';
+          case 7: return 'summer';
+          case 8: return 'autumn';
+          case 9: return 'autumn';
+          case 10: return 'autumn';
+          default:
+            return 'winter';
         }
-        case date < 5: {
-          console.log('spring');
-          break;
-        }
-        case date < 8: {
-          console.log(' summer');
-          break;
-        }
-        case date < 11: {
-          console.log('autumn');
-          break;
-        }
-        default:
-          console.log('winter');
       }
-    } else
-      console.log('throw!ErrorInvalid date!');
-
+    }
+    throw new Error('Invalid date!');
   }
-}
 
 module.exports = {
   getSeason
