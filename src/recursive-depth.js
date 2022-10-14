@@ -16,14 +16,17 @@ const {
  */
 class DepthCalculator {
   calculateDepth(arrays) {
-    sum = 1;
-      for (let i = 0; i < arrays.length; i++) {
-        if (Array.isArray (arrays[i])) {
-          arrays[i] = deepCount(arrays[i]);
-          sum ++;
-        }
+    let summ = 1;
+    for (let i = 0; i < arrays.length; i++) {
+      let count = 1;
+       if (Array.isArray(arrays[i])) {
+        count += this.calculateDepth(arrays[i]);
       }
-      return sum;
+      if (Math.max(summ, count) == count) {
+        summ = count;
+      }
+    }
+    return summ;
   }
 
 }
