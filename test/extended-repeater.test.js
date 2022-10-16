@@ -13,7 +13,7 @@ describe('Extended repeater', () => {
   describe('variable presence', () => {
     it.optional('function repeater exists', () => {
       expect(repeater).to.exist;
-    });
+    })
   });
 
   //Specific requirements
