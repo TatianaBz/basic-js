@@ -23,26 +23,24 @@ class VigenereCipheringMachine {
   constructor(cod) {
     this.cod = "";
   }
-  er() {
-    if (
-      message == undefined ||
-      encryptedMessage == undefined ||
-      key == undefined
-    ) {
+
+  encrypt(message, key) {
+    if (message == undefined || key == undefined) {
       throw new Error("Incorrect arguments!");
     }
-  }
-  encrypt(message, key) {
     if (this.cod == true || this.cod == "") {
       let arrMessage = message.toUpperCase().split("");
-      let arrkey = key.repeat(Math.ceil(message.length / key.length)).split("");
+      let arrkey = key
+        .toUpperCase()
+        .repeat(Math.ceil(message.length / key.length))
+        .split("");
       let answer = [];
       let i = 0;
       arrMessage.map((e) => {
         if (e.codePointAt(0) >= 65 && e.codePointAt(0) <= 90) {
-          let elem = e.codePointAt(0) - 65 + (arrkey[i].codePointAt(0) - 97);
+          let elem =
+            (e.codePointAt(0) - 65 + (arrkey[i].codePointAt(0) - 65)) % 26;
           i++;
-          if (elem > 26) elem -= 26;
           answer.push(String.fromCharCode(elem + 65));
         } else answer.push(e);
       });
@@ -50,18 +48,22 @@ class VigenereCipheringMachine {
     }
   }
   decrypt(encryptedMessage, key) {
+    if (encryptedMessage == undefined || key == undefined) {
+      throw new Error("Incorrect arguments!");
+    }
     if (this.cod == false) {
       let arrMessage = encryptedMessage.toUpperCase().split("");
       let arrkey = key
+        .toUpperCase()
         .repeat(Math.ceil(encryptedMessage.length / key.length))
         .split("");
       let answer = [];
       let j = 0;
       arrMessage.map((e) => {
         if (e.codePointAt(0) >= 65 && e.codePointAt(0) <= 90) {
-          let elem = e.codePointAt(0) - 65 - (arrkey[j].codePointAt(0) - 97);
+          let elem =
+            (e.codePointAt(0) - 65 - (arrkey[j].codePointAt(0) - 65) + 26) % 26;
           j++;
-          if (elem <= 0) elem += 26;
           answer.push(String.fromCharCode(elem + 65));
         } else answer.push(e);
       });
