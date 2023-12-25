@@ -159,7 +159,7 @@ describe("Vigenere cipher", () => {
     const reverseMachine = new VigenereCipheringMachine(false);
 
     it.optional("double-sided direct cryptography", () => {
-      for (let i = 2; i < 4; i += 1) {
+      for (let i = 2; i < 200; i += 1) {
         const testStr = createTestString(i);
         const testKey = createTestKey(i + (i % 2));
         const encrypted = directMachine.encrypt(testStr, testKey);
