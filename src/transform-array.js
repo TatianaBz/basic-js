@@ -18,7 +18,7 @@ function transform(arr) {
     throw new Error("'arr' parameter must be an instance of the Array!");
   }
 
-  let result = [];
+  let res = [];
 
   for (let i = 0; i < arr.length; i += 1) {
     switch (arr[i]) {
@@ -26,25 +26,25 @@ function transform(arr) {
         i += 1;
         break;
       case "--discard-prev":
-        if (result.length > 0 && result[result.length - 1] === arr[i - 1]) {
-          result.pop();
+        if (res.length > 0 && res[res.length - 1] === arr[i - 1]) {
+          res.pop();
         }
         break;
       case "--double-next":
         if (arr[i + 1]) {
-          result.push(arr[i + 1]);
+          res.push(arr[i + 1]);
         }
         break;
       case "--double-prev":
-        if (arr[i - 1] && result[result.length - 1] === arr[i - 1]) {
-          result.push(arr[i - 1]);
+        if (arr[i - 1] && res[res.length - 1] === arr[i - 1]) {
+          res.push(arr[i - 1]);
         }
         break;
       default:
-        result.push(arr[i]);
+        res.push(arr[i]);
     }
   }
-  return result;
+  return res;
 }
 
 module.exports = {
